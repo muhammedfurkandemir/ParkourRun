@@ -5,7 +5,7 @@ using UnityEngine;
 public class Karakter : MonoBehaviour
 {
     public GameManager _GameManager;
-    public GameObject Camera;
+    public Kamera _Camera;
     public GameObject CharacterFinalPosition;
     bool isCharacterFinalPointOn;
     private void FixedUpdate()
@@ -50,7 +50,7 @@ public class Karakter : MonoBehaviour
         }
         else if (other.CompareTag("FinalTrigger"))
         {
-            Camera.GetComponent<Kamera>().İsFinalPointOn = true;
+            _Camera.İsFinalPointOn = true;
             _GameManager.TriggerEnemy();
             isCharacterFinalPointOn = true;
 

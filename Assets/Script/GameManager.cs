@@ -5,8 +5,7 @@ using Furkan;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("GameObject")]
-    public GameObject DestinationPoint;
+    [Header("GameObject")]   
     public GameObject MainCharacter;
 
     public static int InstantCharacterCount = 1;
@@ -19,6 +18,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Enemies;
     public int EnemyCount;
     bool isGameOver;
+    bool isCometoEnd;
 
     private void Start()
     {
@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
                 item.GetComponent<Enemy>().AnimationTrigger();
             }
         }
+        isCometoEnd = true;
+        BattleState();
     }
     void Update()
     {
@@ -58,40 +60,44 @@ public class GameManager : MonoBehaviour
 
     void BattleState()
     {
-        if (InstantCharacterCount==1||EnemyCount==0)
+        if (isCometoEnd)
         {
-            isGameOver = true;
-            foreach (var item in Enemies)
+            if (InstantCharacterCount == 1 || EnemyCount == 0)
             {
-                if (item.activeInHierarchy)
+                isGameOver = true;
+                foreach (var item in Enemies)
                 {
-                    item.GetComponent<Animator>().SetBool("Fight", false);
-                    item.GetComponent<Animator>().SetBool("Final", true);
+                    if (item.activeInHierarchy)
+                    {
+                        item.GetComponent<Animator>().SetBool("Fight", false);
+                        item.GetComponent<Animator>().SetBool("Final", true);
+                    }
                 }
-            }
-            foreach (var item in SubCharacters)
-            {
-                if (item.activeInHierarchy)
+                foreach (var item in SubCharacters)
                 {
-                    item.GetComponent<Animator>().SetBool("Fight", false);
+                    if (item.activeInHierarchy)
+                    {
+                        item.GetComponent<Animator>().SetBool("Fight", false);
+                    }
                 }
-            }
-            if (InstantCharacterCount <= EnemyCount)
-            {
-                print("kaybettin");
-                
-                MainCharacter.GetComponent<Animator>().SetBool("lose", true);
-                MainCharacter.GetComponent<Animator>().SetBool("win", false);
-            }
-            else
-            {
-                print("kazandın");
-               
-                MainCharacter.GetComponent<Animator>().SetBool("win", true);
-                MainCharacter.GetComponent<Animator>().SetBool("lose", false);
-                MainCharacter.transform.Rotate(0, -180,0 );
+                if (InstantCharacterCount <= EnemyCount)
+                {
+                    print("kaybettin");
+
+                    MainCharacter.GetComponent<Animator>().SetBool("lose", true);
+                    MainCharacter.GetComponent<Animator>().SetBool("win", false);
+                }
+                else
+                {
+                    print("kazandın");
+
+                    MainCharacter.GetComponent<Animator>().SetBool("win", true);
+                    MainCharacter.GetComponent<Animator>().SetBool("lose", false);
+                    MainCharacter.transform.Rotate(0, -180, 0);
+                }
             }
         }
+       
         
     }
     public void CharacterManager(string OperationType, int inComeNumber, Transform spawn)

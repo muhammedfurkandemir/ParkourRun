@@ -5,50 +5,49 @@ using UnityEngine.AI;
 
 public class Sub_Character : MonoBehaviour
 {
-    GameObject Target;
+    public GameObject Target;
     NavMeshAgent Agent;
+    public GameManager _GameManager;
     
     void Start()
     {
-        Agent = GetComponent<NavMeshAgent>();
-        Target = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestinationPoint;
+        Agent = GetComponent<NavMeshAgent>();       
+        
     }
-
-    // Update is called once per frame
+    
     private void LateUpdate()
     {
         Agent.SetDestination(Target.transform.position);
     }
+    Vector3 GetPosition()
+    {
+        return new Vector3(transform.position.x, .23f, transform.position.z);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PinBox"))
-        {
-            Vector3 PositionChange = new Vector3(transform.position.x, .23f, transform.position.z);
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().CreateDeadEfect(PositionChange);
+        {            
+            _GameManager.CreateDeadEfect(GetPosition());
             gameObject.SetActive(false);
         }
-        if (other.CompareTag("Obstacle_Saw"))
-        {
-            Vector3 PositionChange = new Vector3(transform.position.x, .23f, transform.position.z);
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().CreateDeadEfect(PositionChange);
+        else if (other.CompareTag("Obstacle_Saw"))
+        {            
+            _GameManager.CreateDeadEfect(GetPosition());
             gameObject.SetActive(false);
         }
-        if (other.CompareTag("PropellerNeedle"))
+        else if (other.CompareTag("PropellerNeedle"))
         {
-            Vector3 PositionChange = new Vector3(transform.position.x, .23f, transform.position.z);
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().CreateDeadEfect(PositionChange);
+            _GameManager.CreateDeadEfect(GetPosition());
             gameObject.SetActive(false);
         }
-        if (other.CompareTag("SledgeHammer"))
-        {
-            Vector3 PositionChange = new Vector3(transform.position.x, .23f, transform.position.z);
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().CreateDeadEfect(PositionChange,true);
+        else if (other.CompareTag("SledgeHammer"))
+        {;
+            _GameManager.CreateDeadEfect(GetPosition(), true);
             gameObject.SetActive(false);
         }
-        if (other.CompareTag("Enemy"))
+        else if (other.CompareTag("Enemy"))
         {
-            Vector3 PositionChange = new Vector3(transform.position.x, .23f, transform.position.z);
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().CreateDeadEfect(PositionChange,false,false);
+            _GameManager.CreateDeadEfect(GetPosition(), false,false);
             gameObject.SetActive(false);
         }
     }
