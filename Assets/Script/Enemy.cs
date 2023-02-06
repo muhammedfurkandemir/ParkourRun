@@ -5,13 +5,10 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public GameManager _GameManager;
     public GameObject FightPoint;
-    NavMeshAgent _NavMesh;
-    bool isFightStart;
-    void Start()
-    {
-        _NavMesh = GetComponent<NavMeshAgent>();
-    }
+    public  NavMeshAgent _NavMesh;
+    bool isFightStart;  
 
     public void AnimationTrigger()
     {
@@ -31,7 +28,7 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("SubCharacter"))
         {
             Vector3 PositionChange = new Vector3(transform.position.x, .23f, transform.position.z);
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().CreateDeadEfect(PositionChange,false,true);
+            _GameManager.CreateDeadEfect(PositionChange,false,true);
             gameObject.SetActive(false);
         }
     }

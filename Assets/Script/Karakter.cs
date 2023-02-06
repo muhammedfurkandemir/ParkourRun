@@ -5,7 +5,7 @@ using UnityEngine;
 public class Karakter : MonoBehaviour
 {
     public GameManager _GameManager;
-    public GameObject Camera;
+    public Kamera _Camera;
     public GameObject CharacterFinalPosition;
     bool isCharacterFinalPointOn;
     private void FixedUpdate()
@@ -50,10 +50,35 @@ public class Karakter : MonoBehaviour
         }
         else if (other.CompareTag("FinalTrigger"))
         {
-            Camera.GetComponent<Kamera>().İsFinalPointOn = true;
+            _Camera.İsFinalPointOn = true;
             _GameManager.TriggerEnemy();
             isCharacterFinalPointOn = true;
 
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Column")||collision.gameObject.CompareTag("PinBox"))
+        {
+            if (transform.position.x>0)
+            {
+                transform.position = new Vector3(transform.position.x - 2f, transform.position.y, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x + 2f, transform.position.y, transform.position.z);
+            }
+        }
+        else if (collision.gameObject.CompareTag("PropellerNeedle"))
+        {
+            if (transform.position.x > 0)
+            {
+                transform.position = new Vector3(transform.position.x - .75f, transform.position.y, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x + .75f, transform.position.y, transform.position.z);
+            }
         }
     }
 }
