@@ -10,6 +10,7 @@ public class EmptyCharacter : MonoBehaviour
     public NavMeshAgent _NavMesh;
     public Animator _Animator;
     public GameObject Target;
+    public GameManager _GameManager;
     bool Contact;
     void Start()
     {
@@ -26,6 +27,12 @@ public class EmptyCharacter : MonoBehaviour
         {
             ChangeMaterialAndAnimationTrigger();
             Contact = true;
+        }
+        else if (other.CompareTag("Enemy"))
+        {
+            Vector3 newPos = new Vector3(transform.position.x, transform.position.y + .23f, transform.position.z);
+            _GameManager.CreateDeadEfect(newPos, false, false);
+            gameObject.SetActive(false);
         }
     }
     void ChangeMaterialAndAnimationTrigger()

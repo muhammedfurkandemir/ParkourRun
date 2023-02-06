@@ -55,6 +55,12 @@ public class Karakter : MonoBehaviour
             isCharacterFinalPointOn = true;
 
         }
+        else if (other.CompareTag("EmptyCharacter"))
+        {
+            _GameManager.SubCharacters.Add(other.gameObject);
+            GameManager.InstantCharacterCount++;
+            
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
