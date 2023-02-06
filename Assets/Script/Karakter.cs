@@ -56,4 +56,29 @@ public class Karakter : MonoBehaviour
 
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Column")||collision.gameObject.CompareTag("PinBox"))
+        {
+            if (transform.position.x>0)
+            {
+                transform.position = new Vector3(transform.position.x - 2f, transform.position.y, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x + 2f, transform.position.y, transform.position.z);
+            }
+        }
+        else if (collision.gameObject.CompareTag("PropellerNeedle"))
+        {
+            if (transform.position.x > 0)
+            {
+                transform.position = new Vector3(transform.position.x - .75f, transform.position.y, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x + .75f, transform.position.y, transform.position.z);
+            }
+        }
+    }
 }
