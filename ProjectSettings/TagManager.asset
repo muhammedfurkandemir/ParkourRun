@@ -16,6 +16,8 @@ TagManager:
   - SledgeHammer
   - Enemy
   - FinalTrigger
+  - Column
+  - EmptyCharacter
   layers:
   - Default
   - TransparentFX
