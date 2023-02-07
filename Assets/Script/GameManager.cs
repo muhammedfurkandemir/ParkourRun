@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
 
                     MainCharacter.GetComponent<Animator>().SetBool("lose", true);
                     MainCharacter.GetComponent<Animator>().SetBool("win", false);
+                    MainCharacter.transform.Rotate(0, -180, 0);
                 }
                 else
                 {
@@ -128,6 +129,7 @@ public class GameManager : MonoBehaviour
                 item.SetActive(true);
                 item.transform.position = Position;
                 item.GetComponent<ParticleSystem>().Play();
+                item.GetComponent<AudioSource>().Play();
                 if (!state)
                     InstantCharacterCount--;
                 else
