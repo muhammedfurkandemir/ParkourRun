@@ -33,6 +33,7 @@ public class EmptyCharacter : MonoBehaviour
             {
                 ChangeMaterialAndAnimationTrigger();
                 Contact = true;
+                GetComponent<AudioSource>().Play();
             }            
         }
         else if (other.CompareTag("PinBox"))

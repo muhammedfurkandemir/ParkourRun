@@ -49,6 +49,7 @@ public class Sub_Character : MonoBehaviour
         {
             _GameManager.CreateDeadEfect(GetPosition(), false,false);
             gameObject.SetActive(false);
+            transform.position = Vector3.back;
         }
         else if (other.CompareTag("EmptyCharacter"))
         {

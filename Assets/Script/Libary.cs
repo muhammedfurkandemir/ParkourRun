@@ -21,6 +21,7 @@ namespace Furkan
                             item2.SetActive(true);
                             item2.transform.position = spawn.position;
                             item2.GetComponent<ParticleSystem>().Play();
+                            item2.GetComponent<AudioSource>().Play();
                             break;
                         }
                         item.transform.position = spawn.position + new Vector3(0, 0, -1f);
@@ -51,6 +52,7 @@ namespace Furkan
                             item2.SetActive(true);
                             item2.transform.position = spawn.position;
                             item2.GetComponent<ParticleSystem>().Play();
+                            item2.GetComponent<AudioSource>().Play();
                             break;
                         }
                         item.transform.position = spawn.position + new Vector3(0, 0, -1f);
@@ -82,6 +84,7 @@ namespace Furkan
                             item2.SetActive(true);
                             item2.transform.position = newPoz;
                             item2.GetComponent<ParticleSystem>().Play();
+                            item2.GetComponent<AudioSource>().Play();
                             break;
                         }
                         item.transform.position = Vector3.zero;
@@ -105,6 +108,7 @@ namespace Furkan
                                 item2.SetActive(true);
                                 item2.transform.position = newPoz;
                                 item2.GetComponent<ParticleSystem>().Play();
+                                item2.GetComponent<AudioSource>().Play();
                                 break;
                             }
                             item.transform.position = Vector3.zero;
@@ -137,6 +141,7 @@ namespace Furkan
                             item2.SetActive(true);
                             item2.transform.position = newPoz;
                             item2.GetComponent<ParticleSystem>().Play();
+                            item2.GetComponent<AudioSource>().Play();
                             break;
                         }
                         item.transform.position = Vector3.zero;
@@ -161,6 +166,7 @@ namespace Furkan
                                 item2.SetActive(true);
                                 item2.transform.position = newPoz;
                                 item2.GetComponent<ParticleSystem>().Play();
+                                item2.GetComponent<AudioSource>().Play();
                                 break;
                             }
                             item.transform.position = Vector3.zero;
