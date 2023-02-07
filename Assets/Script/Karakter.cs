@@ -57,9 +57,7 @@ public class Karakter : MonoBehaviour
         }
         else if (other.CompareTag("EmptyCharacter"))
         {
-            _GameManager.SubCharacters.Add(other.gameObject);
-            GameManager.InstantCharacterCount++;
-            
+            _GameManager.SubCharacters.Add(other.gameObject);           
         }
     }
     private void OnCollisionEnter(Collision collision)

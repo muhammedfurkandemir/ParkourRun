@@ -50,5 +50,9 @@ public class Sub_Character : MonoBehaviour
             _GameManager.CreateDeadEfect(GetPosition(), false,false);
             gameObject.SetActive(false);
         }
+        else if (other.CompareTag("EmptyCharacter"))
+        {
+            _GameManager.SubCharacters.Add(other.gameObject);            
+        }
     }
 }
