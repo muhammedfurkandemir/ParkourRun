@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Furkan
 {
-    public class Mathmatical_Funcition : MonoBehaviour
+    public class Mathmatical_Funcition
     {
-        public static void Multiple(int inComeNumber, List<GameObject> SubCharacters, Transform spawn, List<GameObject> SpawnEfects)
+        public void Multiple(int inComeNumber, List<GameObject> SubCharacters, Transform spawn, List<GameObject> SpawnEfects)
         {
             int LoopNumber = (GameManager.InstantCharacterCount * inComeNumber) - GameManager.InstantCharacterCount;
             int countNumber = 0;
@@ -38,7 +38,7 @@ namespace Furkan
             GameManager.InstantCharacterCount *= inComeNumber;
         }
 
-        public static void Sum(int inComeNumber, List<GameObject> SubCharacters, Transform spawn, List<GameObject> SpawnEfects)
+        public void Sum(int inComeNumber, List<GameObject> SubCharacters, Transform spawn, List<GameObject> SpawnEfects)
         {
             int countNumber1 = 0;
             foreach (var item in SubCharacters)
@@ -70,7 +70,7 @@ namespace Furkan
             GameManager.InstantCharacterCount += inComeNumber;
         }
 
-        public static void Sub(int inComeNumber, List<GameObject> SubCharacters, List<GameObject> DeadEfects)
+        public void Sub(int inComeNumber, List<GameObject> SubCharacters, List<GameObject> DeadEfects)
         {
             if (GameManager.InstantCharacterCount < inComeNumber)
             {
@@ -127,7 +127,7 @@ namespace Furkan
             }
         }
 
-        public static void Divide(int inComeNumber, List<GameObject> SubCharacters,List<GameObject> DeadEfects)
+        public void Divide(int inComeNumber, List<GameObject> SubCharacters,List<GameObject> DeadEfects)
         {
             if (GameManager.InstantCharacterCount <= inComeNumber)
             {
@@ -199,6 +199,38 @@ namespace Furkan
             }
         }
 
+    }
+
+    public class Mmemory_Managment
+    {
+        public void DataSave_String(string Key,string Value)
+        {
+            PlayerPrefs.SetString(Key, Value);
+            PlayerPrefs.Save();
+        }
+        public void DataSave_Int(string Key,int Value)
+        {
+            PlayerPrefs.SetInt(Key, Value);
+            PlayerPrefs.Save();
+        }
+        public void DataSave_Float(string Key,float Value)
+        {
+            PlayerPrefs.SetFloat(Key, Value);
+            PlayerPrefs.Save();
+        }
+
+        public string DataLoad_String(string Key)
+        {
+            return PlayerPrefs.GetString(Key);
+        }
+        public int DataLoad_Int(string Key)
+        {
+            return PlayerPrefs.GetInt(Key);
+        }
+        public float DataLoad_Float(string Key)
+        {
+            return PlayerPrefs.GetFloat(Key);
+        }
     }
 }
 

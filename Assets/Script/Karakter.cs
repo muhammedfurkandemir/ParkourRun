@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class Karakter : MonoBehaviour
 {
     public GameManager _GameManager;
@@ -11,13 +12,14 @@ public class Karakter : MonoBehaviour
     bool isCharacterFinalPointOn;
     public Slider _Slider;
     public GameObject FinishPoint;
+    
+    
     private void FixedUpdate()
     {
         if (!isCharacterFinalPointOn)
            transform.Translate(Vector3.forward * 1f * Time.deltaTime);  
         
     }
-
     private void Start()
     {
         //slider starting max value 

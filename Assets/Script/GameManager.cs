@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     bool isGameOver;
     bool isCometoEnd;
 
+
+    Mathmatical_Funcition _Mathmatical_Funcition = new Mathmatical_Funcition();
+    Mmemory_Managment _Memory_Managment = new Mmemory_Managment();
     private void Start()
     {
         CreateEnemy();
@@ -106,16 +109,16 @@ public class GameManager : MonoBehaviour
         switch (OperationType)
         {
             case "Multiple":
-                Mathmatical_Funcition.Multiple(inComeNumber, SubCharacters, spawn,SpawnEfects);
+                _Mathmatical_Funcition.Multiple(inComeNumber, SubCharacters, spawn,SpawnEfects);
                 break;
             case "Sum":
-                Mathmatical_Funcition.Sum(inComeNumber, SubCharacters, spawn,SpawnEfects);
+                _Mathmatical_Funcition.Sum(inComeNumber, SubCharacters, spawn,SpawnEfects);
                 break;
             case "Sub":
-                Mathmatical_Funcition.Sub(inComeNumber, SubCharacters,DeadEfects);
+                _Mathmatical_Funcition.Sub(inComeNumber, SubCharacters,DeadEfects);
                 break;
             case "Divide":
-                Mathmatical_Funcition.Divide(inComeNumber, SubCharacters, DeadEfects);
+                _Mathmatical_Funcition.Divide(inComeNumber, SubCharacters, DeadEfects);
                 break;
         }
     }
