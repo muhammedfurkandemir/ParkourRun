@@ -25,6 +25,8 @@ public class Level_Manager : MonoBehaviour
             else
             {
                 Buttons[i].GetComponent<Image>().sprite = sprite;
+                //Buttons[i].interactable = false; //bu şekilde bir yönetem kullaabilriz.ancak bu yapı silik görünüm verir.
+                Buttons[i].enabled = false;
             }
         }
     }
