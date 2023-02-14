@@ -13,14 +13,18 @@ public class Level_Manager : MonoBehaviour
     public Sprite sprite;
     void Start()
     {
-        _MemoryManagment.DataSave_Int("LastLevel", level);
+       
         int currentLevel = _MemoryManagment.DataLoad_Int("LastLevel") - 4;
+        int index = 1;
         for (int i = 0; i < Buttons.Length; i++)
         {
             if (i+1<=currentLevel)
             {
-                Buttons[i].GetComponentInChildren<Text>().text = (i + 1).ToString();
-
+                Buttons[i].GetComponentInChildren<Text>().text = index.ToString();
+                int sceneIndex = index + 4;
+                Buttons[i].onClick.AddListener(delegate { SceneLoad(sceneIndex); });               
+                //delegate ile sceneLoad fonksiyonuna parametre göndeririz.
+                //onClick script tarafında button tıklanmasının alınmasıdır.
             }
             else
             {
@@ -28,10 +32,15 @@ public class Level_Manager : MonoBehaviour
                 //Buttons[i].interactable = false; //bu şekilde bir yönetem kullaabilriz.ancak bu yapı silik görünüm verir.
                 Buttons[i].enabled = false;
             }
+            index++;
         }
     }
+    public void SceneLoad(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+    }
 
-    
+
     public void TurnBack()
     {
         SceneManager.LoadScene(0);//ana menu ındex=0

@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
                     MainCharacter.GetComponent<Animator>().SetBool("win", true);
                     MainCharacter.GetComponent<Animator>().SetBool("lose", false);
                     MainCharacter.transform.Rotate(0, -180, 0);
+                    _Memory_Managment.DataSave_Int("LateLevel", _Memory_Managment.DataLoad_Int("LateLevel") + 1);
                 }
             }
         }
