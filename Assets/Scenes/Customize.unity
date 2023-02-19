@@ -1360,7 +1360,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 959850335}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1932857640}
+        m_TargetAssemblyTypeName: CustomizeManager, Assembly-CSharp
+        m_MethodName: CapAction_Button
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: back
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &959850335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1922,7 +1934,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1572996681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2361,6 +2373,9 @@ MonoBehaviour:
   - {fileID: 244253659}
   - {fileID: 1707949553}
   - {fileID: 857561236}
+  CapButtons:
+  - {fileID: 959850332}
+  - {fileID: 2090366680}
   Sticks:
   - {fileID: 919132148125274514}
   - {fileID: 919132149429339706}
@@ -2715,7 +2730,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2090366683}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1932857640}
+        m_TargetAssemblyTypeName: CustomizeManager, Assembly-CSharp
+        m_MethodName: CapAction_Button
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: forward
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2090366683
 MonoBehaviour:
   m_ObjectHideFlags: 0
