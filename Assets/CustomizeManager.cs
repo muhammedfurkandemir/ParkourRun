@@ -67,6 +67,20 @@ public class CustomizeManager : MonoBehaviour
                 CapButtons[1].interactable = true;
             }
         }
+        else
+        {
+            if (capIndex==-1)
+            {
+                CapButtons[0].interactable = false;
+            }
+            else
+            {                
+                CapButtons[1].interactable = true;
+                Caps[capIndex].SetActive(false);
+                capIndex--;
+                Caps[capIndex].SetActive(true);
+            }
+        }
     }
 
     
