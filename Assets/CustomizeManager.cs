@@ -37,8 +37,9 @@ public class CustomizeManager : MonoBehaviour
             capIndex = _MemoryManagment.DataLoad_Int("activeCap");
             Caps[capIndex].SetActive(true);
             capText.text = "200";
-        }
+        }        
     }
+    
     public void CapAction_Button(string action)
     {
         if (action=="forward")
@@ -64,21 +65,32 @@ public class CustomizeManager : MonoBehaviour
             }
             if (capIndex!=-1)
             {
-                CapButtons[1].interactable = true;
+                CapButtons[0].interactable = true;
             }
         }
-        else
+        else 
         {
-            if (capIndex==-1)
+            if (capIndex!=-1)
+            {
+                Caps[capIndex].SetActive(false);
+                capIndex--;
+                if (capIndex!=-1)
+                {
+                    Caps[capIndex].SetActive(true);
+                    CapButtons[0].interactable = true;
+                }
+                else
+                {
+                    CapButtons[0].interactable = false;
+                }
+            }
+            else
             {
                 CapButtons[0].interactable = false;
             }
-            else
-            {                
+            if (capIndex != Caps.Length - 1)//en önemli mantığı burda.burada bu if i koymazsak geri tuşunab astığımızda ileri tuşu geri aktif olmayacaktı.
+            {
                 CapButtons[1].interactable = true;
-                Caps[capIndex].SetActive(false);
-                capIndex--;
-                Caps[capIndex].SetActive(true);
             }
         }
     }

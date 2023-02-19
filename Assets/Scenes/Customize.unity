@@ -2374,8 +2374,8 @@ MonoBehaviour:
   - {fileID: 1707949553}
   - {fileID: 857561236}
   CapButtons:
-  - {fileID: 959850332}
-  - {fileID: 2090366680}
+  - {fileID: 959850334}
+  - {fileID: 2090366682}
   Sticks:
   - {fileID: 919132148125274514}
   - {fileID: 919132149429339706}
