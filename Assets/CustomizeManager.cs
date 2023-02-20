@@ -33,7 +33,7 @@ public class CustomizeManager : MonoBehaviour
                 item.SetActive(false);
             }
             capIndex = -1;
-            capText.text = "0";
+            capText.text = "Varsayılan";
         }
         else
         {
@@ -41,6 +41,9 @@ public class CustomizeManager : MonoBehaviour
             Caps[capIndex].SetActive(true);
             capText.text = "200";
         }
+        _DataManagment.Save(_ItemInformation);
+        _DataManagment.Load();
+        _ItemInformation = _DataManagment.TransferData();
         
     }
     
@@ -53,12 +56,14 @@ public class CustomizeManager : MonoBehaviour
             {
                 capIndex = 0;
                 Caps[capIndex].SetActive(true);
+                capText.text = _ItemInformation[capIndex].ItemName;
             }
             else
             {
                 Caps[capIndex].SetActive(false);
                 capIndex++;
                 Caps[capIndex].SetActive(true);
+                capText.text = _ItemInformation[capIndex].ItemName;
             }
             if (capIndex==Caps.Length-1)
             {
@@ -83,15 +88,19 @@ public class CustomizeManager : MonoBehaviour
                 {
                     Caps[capIndex].SetActive(true);
                     CapButtons[0].interactable = true;
+                    capText.text = _ItemInformation[capIndex].ItemName;
                 }
                 else
                 {
                     CapButtons[0].interactable = false;
+                    capText.text = "Varsayılan";
                 }
+                
             }
             else
             {
                 CapButtons[0].interactable = false;
+                capText.text = "Varsayılan";
             }
             if (capIndex != Caps.Length - 1)//en önemli mantığı burda.burada bu if i koymazsak geri tuşunab astığımızda ileri tuşu geri aktif olmayacaktı.
             {

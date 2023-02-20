@@ -263,17 +263,19 @@ namespace Furkan
         {
             
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath/*=>uygulamanın çalışma klasörününün olduğu yeri verir*/ + "/PlayerData");
+            FileStream file = File.OpenWrite(Application.persistentDataPath/*=>uygulamanın çalışma klasörününün olduğu yeri verir*/ + "/ItemData");
             bf.Serialize(file, _ItemInformation);
             file.Close();
         }
+       
+
         List<ItemInformation> ItemLoadInformation;//kullan at liste oluşturdum.
         public void Load()
         {
-            if (File.Exists(Application.persistentDataPath + "/PlayerData"))
+            if (File.Exists(Application.persistentDataPath + "/ItemData"))
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(Application.persistentDataPath + "/PlayerData", FileMode.Open);
+                FileStream file = File.Open(Application.persistentDataPath + "/ItemData", FileMode.Open);
                 ItemLoadInformation = (List<ItemInformation>)bf.Deserialize(file);
                 file.Close();
             }
@@ -281,6 +283,16 @@ namespace Furkan
         public List<ItemInformation> TransferData()
         {
             return ItemLoadInformation;
+        }
+        public void InıtialSetupFileCreation(List<ItemInformation> _ItemInformation)
+        {
+            if (!File.Exists(Application.persistentDataPath + "/ItemData"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Create(Application.persistentDataPath + "/ItemData");
+                bf.Serialize(file, _ItemInformation);
+                file.Close();
+            }
         }
     }
 }
