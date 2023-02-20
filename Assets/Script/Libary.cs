@@ -231,7 +231,6 @@ namespace Furkan
         {
             return PlayerPrefs.GetFloat(Key);
         }
-
         public void ControlAndDefine()//oyun ilk açıldığında son kalınan leveli çağırmak içindir.
         {
             if (!PlayerPrefs.HasKey("LastLevel"))//haskey ile bu isimde level olup olmadığını kontrol ederiz.
@@ -240,6 +239,10 @@ namespace Furkan
                 PlayerPrefs.SetInt("Coin", 100);
             }
         }
+    }
+    public class Data
+    {
+        public static int puan;
     }
 }
 
