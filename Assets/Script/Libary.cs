@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Furkan
 {
@@ -242,7 +245,43 @@ namespace Furkan
     }
     public class Data
     {
-        public static int puan;
+        public static List<ItemInformation> _ItemInformation = new List<ItemInformation>();
+    }
+
+    [Serializable]
+    public class ItemInformation
+    {
+        public int GrupIndex;
+        public int ItemIndex;
+        public string ItemName;
+        public int ItemCoin;
+        public bool PurchaseStatus;
+    }
+    public class Data_Managment
+    {
+        public void Save(List<ItemInformation> _ItemInformation)
+        {
+            
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath/*=>uygulamanın çalışma klasörününün olduğu yeri verir*/ + "/PlayerData");
+            bf.Serialize(file, _ItemInformation);
+            file.Close();
+        }
+        List<ItemInformation> ItemLoadInformation;//kullan at liste oluşturdum.
+        public void Load()
+        {
+            if (File.Exists(Application.persistentDataPath + "/PlayerData"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + "/PlayerData", FileMode.Open);
+                ItemLoadInformation = (List<ItemInformation>)bf.Deserialize(file);
+                file.Close();
+            }
+        }
+        public List<ItemInformation> TransferData()
+        {
+            return ItemLoadInformation;
+        }
     }
 }
 

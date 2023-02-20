@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Furkan;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class CustomizeManager : MonoBehaviour
 {
@@ -22,6 +20,9 @@ public class CustomizeManager : MonoBehaviour
 
     int capIndex = -1;//sapkanın olmaması durumu için default değer olarak -1 verdik.
     Mmemory_Managment _MemoryManagment = new Mmemory_Managment();
+    Data_Managment _DataManagment = new Data_Managment();
+
+    public List<ItemInformation> _ItemInformation = new List<ItemInformation>();
     void Start()
     {
         _MemoryManagment.DataSave_Int("activeCap", -1);
@@ -40,29 +41,10 @@ public class CustomizeManager : MonoBehaviour
             Caps[capIndex].SetActive(true);
             capText.text = "200";
         }
-        Save();
-        Load();
+        
     }
     
-    void Save()
-    {
-
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/PlayerData");
-        bf.Serialize(file, Data.puan);
-        file.Close();
-    }
-    void Load()
-    {
-        if (File.Exists(Application.persistentDataPath+"/PlayerData"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/PlayerData", FileMode.Open);
-            Data.puan = (int)bf.Deserialize(file);
-            file.Close();
-        }   
-       
-    }
+    
     public void CapAction_Button(string action)
     {
         if (action=="forward")
