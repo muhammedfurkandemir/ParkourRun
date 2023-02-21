@@ -10,6 +10,8 @@ public class CustomizeManager : MonoBehaviour
     [Header("TextField")]
     public TMP_Text puanText;
     public TMP_Text capText;
+
+    GameObject[] ItemPanel;
     [Header("Caps")]
     public GameObject[] Caps;
     public Button[] CapButtons;
