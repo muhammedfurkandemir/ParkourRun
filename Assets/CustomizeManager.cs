@@ -10,8 +10,9 @@ public class CustomizeManager : MonoBehaviour
     [Header("TextField")]
     public TMP_Text puanText;
     public TMP_Text capText;
-
-    GameObject[] ItemPanel;
+    [Header("ChooseButtons")]
+    public GameObject[] ItemPanels;
+    public GameObject[] ItemButtons;
     [Header("Caps")]
     public GameObject[] Caps;
     public Button[] CapButtons;
@@ -21,6 +22,7 @@ public class CustomizeManager : MonoBehaviour
     public Material[] Costumes;
 
     int capIndex = -1;//sapkanın olmaması durumu için default değer olarak -1 verdik.
+    
     Mmemory_Managment _MemoryManagment = new Mmemory_Managment();
     Data_Managment _DataManagment = new Data_Managment();
 
@@ -110,6 +112,31 @@ public class CustomizeManager : MonoBehaviour
             }
         }
     }
-
+    bool girildimi = false;
+    int oldIndex;
+    Vector3 oldPos;
+    public void ItemButtonAction(int index)
+    {
+        if (girildimi)
+        {
+            ItemButtons[oldIndex].transform.localPosition = oldPos;
+            ItemPanels[oldIndex].SetActive(false);
+        }
+        oldPos = ItemButtons[index].transform.localPosition;
+        oldIndex = index;
+        ItemPanels[index].SetActive(true);
+        ItemButtons[index].transform.localPosition = posVer(index);
+        girildimi = true;
+    }
+    public Vector3 posVer(int index)
+    {
+        return new Vector3(0.85799998f, ItemButtons[index].transform.localPosition.y, -0.493999988f);
+        //transform.localPosition = new Vector3(0.85799998f, -0.233400002f, -0.493999988f);
+    }
     
+   
+
+
+
 }
+
