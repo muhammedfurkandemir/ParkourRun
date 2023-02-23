@@ -7,25 +7,31 @@ using Furkan;
 
 public class CustomizeManager : MonoBehaviour
 {
-    [Header("TextField")]
+    [Header("      TextField")]
     public TMP_Text puanText;
     public TMP_Text capText;
-    [Header("ChooseButtons")]
+    [Header("      ChooseButtons")]
     public GameObject[] ItemPanels;
     public GameObject[] ItemButtons;
-    [Header("Caps")]
+    [Header("      Caps")]
     public GameObject[] Caps;
     public Button[] CapButtons;
-    [Header("Sticks")]
+    [Header("      Sticks")]
     public GameObject[] Sticks;
-    [Header("Materials")]
+    public Button[] StickButtons;
+    [Header("      Materials")]
     public Material[] Costumes;
+    public Button[] CostumeButtons;
 
     int capIndex = -1;//sapkanın olmaması durumu için default değer olarak -1 verdik.
-    
+    //item button action field
+    bool girildimi = false;
+    int oldIndex;
+    Vector3 oldPos;
+
     Mmemory_Managment _MemoryManagment = new Mmemory_Managment();
     Data_Managment _DataManagment = new Data_Managment();
-
+    [Header("      Genel Bilgiler")]
     public List<ItemInformation> _ItemInformation = new List<ItemInformation>();
     void Start()
     {
@@ -111,11 +117,7 @@ public class CustomizeManager : MonoBehaviour
                 CapButtons[1].interactable = true;
             }
         }
-    }
-
-    bool girildimi = false;
-    int oldIndex;
-    Vector3 oldPos;
+    }   
     public void ItemButtonAction(int index)
     {
         if (girildimi)
