@@ -112,6 +112,7 @@ public class CustomizeManager : MonoBehaviour
             }
         }
     }
+
     bool girildimi = false;
     int oldIndex;
     Vector3 oldPos;
@@ -120,17 +121,20 @@ public class CustomizeManager : MonoBehaviour
         if (girildimi)
         {
             ItemButtons[oldIndex].transform.localPosition = oldPos;
+            ItemButtons[oldIndex].transform.localScale = Vector3.one;
             ItemPanels[oldIndex].SetActive(false);
+            girildimi = false;
         }
-        oldPos = ItemButtons[index].transform.localPosition;
+        oldPos = ItemButtons[index].transform.localPosition;        
         oldIndex = index;
         ItemPanels[index].SetActive(true);
-        ItemButtons[index].transform.localPosition = posVer(index);
+        ItemButtons[index].transform.localPosition = PosVer(index);
+        ItemButtons[index].transform.localScale = ItemButtons[index].transform.localScale + new Vector3(.200f, .200f, .200f);
         girildimi = true;
     }
-    public Vector3 posVer(int index)
+    public Vector3 PosVer(int index)
     {
-        return new Vector3(0.85799998f, ItemButtons[index].transform.localPosition.y, -0.493999988f);
+        return new Vector3(0.927f, ItemButtons[index].transform.localPosition.y, ItemButtons[index].transform.localPosition.z);
         //transform.localPosition = new Vector3(0.85799998f, -0.233400002f, -0.493999988f);
     }
     
