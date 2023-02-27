@@ -9,19 +9,21 @@ public class CustomizeManager : MonoBehaviour
 {
     [Header("      TextField")]
     public TMP_Text puanText;
-    public TMP_Text capText;
     [Header("      ChooseButtons")]
     public GameObject[] ItemPanels;
     public GameObject[] ItemButtons;
     [Header("      Caps")]
     public GameObject[] Caps;
     public Button[] CapButtons;
+    public TMP_Text capText;
     [Header("      Sticks")]
     public GameObject[] Sticks;
     public Button[] StickButtons;
+    public TMP_Text stickText;
     [Header("      Materials")]
     public Material[] Costumes;
     public Button[] CostumeButtons;
+    public TMP_Text costumeText;
 
     int capIndex = -1;
     int stickIndex = -1;
@@ -38,6 +40,8 @@ public class CustomizeManager : MonoBehaviour
     void Start()
     {
         _MemoryManagment.DataSave_Int("activeCap", -1);
+        _MemoryManagment.DataSave_Int("activeStick", -1);
+
         if (_MemoryManagment.DataLoad_Int("activeCap")==-1)
         {
             foreach (var item in Caps)
@@ -51,8 +55,23 @@ public class CustomizeManager : MonoBehaviour
         {
             capIndex = _MemoryManagment.DataLoad_Int("activeCap");
             Caps[capIndex].SetActive(true);
-            capText.text = "200";
         }
+
+        if (_MemoryManagment.DataLoad_Int("activeStick") == -1)
+        {
+            foreach (var item in Sticks)
+            {
+                item.SetActive(false);
+            }
+            stickIndex = -1;
+            stickText.text = "Varsayılan";
+        }
+        else
+        {
+            stickIndex = _MemoryManagment.DataLoad_Int("activeStick");
+            Sticks[stickIndex].SetActive(true);
+        }
+
         _DataManagment.Save(_ItemInformation);
         _DataManagment.Load();
         _ItemInformation = _DataManagment.TransferData();
@@ -129,55 +148,56 @@ public class CustomizeManager : MonoBehaviour
             {
                 stickIndex = 0;
                 Sticks[stickIndex].SetActive(true);
-                capText.text = _ItemInformation[stickIndex].ItemName;
+                stickText.text = _ItemInformation[stickIndex + 9].ItemName;
             }
             else
             {
+               
                 Sticks[stickIndex].SetActive(false);
-                stickIndex++;
+                stickIndex++;               
                 Sticks[stickIndex].SetActive(true);
-                capText.text = _ItemInformation[stickIndex].ItemName;
+                stickText.text = _ItemInformation[stickIndex + 9].ItemName;
             }
             if (stickIndex == Sticks.Length - 1)
             {
-                CapButtons[1].interactable = false;
+                StickButtons[1].interactable = false;
             }
             else
             {
-                CapButtons[1].interactable = true;
+                StickButtons[1].interactable = true;
             }
             if (stickIndex != -1)
             {
-                CapButtons[0].interactable = true;
+                StickButtons[0].interactable = true;
             }
         }
         else
         {
             if (stickIndex != -1)
-            {
+            {               
                 Sticks[stickIndex].SetActive(false);
                 stickIndex--;
                 if (stickIndex != -1)
-                {
+                {                   
                     Sticks[stickIndex].SetActive(true);
-                    CapButtons[0].interactable = true;
-                    capText.text = _ItemInformation[stickIndex].ItemName;
+                    StickButtons[0].interactable = true;
+                    stickText.text = _ItemInformation[stickIndex + 9].ItemName;
                 }
                 else
                 {
-                    CapButtons[0].interactable = false;
-                    capText.text = "Varsayılan";
+                    StickButtons[0].interactable = false;
+                    stickText.text = "Varsayılan";
                 }
 
             }
             else
             {
-                CapButtons[0].interactable = false;
-                capText.text = "Varsayılan";
+                StickButtons[0].interactable = false;
+                stickText.text = "Varsayılan";
             }
             if (stickIndex != Sticks.Length - 1)//en önemli mantığı burda.burada bu if i koymazsak geri tuşunab astığımızda ileri tuşu geri aktif olmayacaktı.
             {
-                CapButtons[1].interactable = true;
+                StickButtons[1].interactable = true;
             }
         }
     }
