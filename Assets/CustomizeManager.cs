@@ -23,7 +23,9 @@ public class CustomizeManager : MonoBehaviour
     public Material[] Costumes;
     public Button[] CostumeButtons;
 
-    int capIndex = -1;//sapkanın olmaması durumu için default değer olarak -1 verdik.
+    int capIndex = -1;
+    int stickIndex = -1;
+    int materialIndex = -1;//sapkanın olmaması durumu için default değer olarak -1 verdik.
     //item button action field
     bool girildimi = false;
     int oldIndex;
@@ -31,7 +33,7 @@ public class CustomizeManager : MonoBehaviour
 
     Mmemory_Managment _MemoryManagment = new Mmemory_Managment();
     Data_Managment _DataManagment = new Data_Managment();
-    [Header("      Genel Bilgiler")]
+    [Header("      Item Information")]
     public List<ItemInformation> _ItemInformation = new List<ItemInformation>();
     void Start()
     {
@@ -117,7 +119,68 @@ public class CustomizeManager : MonoBehaviour
                 CapButtons[1].interactable = true;
             }
         }
-    }   
+    }
+
+    public void WeaponAction_Button(string action)
+    {
+        if (action == "forward")
+        {
+            if (stickIndex == -1)
+            {
+                stickIndex = 0;
+                Sticks[stickIndex].SetActive(true);
+                capText.text = _ItemInformation[stickIndex].ItemName;
+            }
+            else
+            {
+                Sticks[stickIndex].SetActive(false);
+                stickIndex++;
+                Sticks[stickIndex].SetActive(true);
+                capText.text = _ItemInformation[stickIndex].ItemName;
+            }
+            if (stickIndex == Sticks.Length - 1)
+            {
+                CapButtons[1].interactable = false;
+            }
+            else
+            {
+                CapButtons[1].interactable = true;
+            }
+            if (stickIndex != -1)
+            {
+                CapButtons[0].interactable = true;
+            }
+        }
+        else
+        {
+            if (stickIndex != -1)
+            {
+                Sticks[stickIndex].SetActive(false);
+                stickIndex--;
+                if (stickIndex != -1)
+                {
+                    Sticks[stickIndex].SetActive(true);
+                    CapButtons[0].interactable = true;
+                    capText.text = _ItemInformation[stickIndex].ItemName;
+                }
+                else
+                {
+                    CapButtons[0].interactable = false;
+                    capText.text = "Varsayılan";
+                }
+
+            }
+            else
+            {
+                CapButtons[0].interactable = false;
+                capText.text = "Varsayılan";
+            }
+            if (stickIndex != Sticks.Length - 1)//en önemli mantığı burda.burada bu if i koymazsak geri tuşunab astığımızda ileri tuşu geri aktif olmayacaktı.
+            {
+                CapButtons[1].interactable = true;
+            }
+        }
+    }
     public void ItemButtonAction(int index)
     {
         if (girildimi)
@@ -134,7 +197,7 @@ public class CustomizeManager : MonoBehaviour
         ItemButtons[index].transform.localScale = ItemButtons[index].transform.localScale + new Vector3(.200f, .200f, .200f);
         girildimi = true;
     }
-    public Vector3 PosVer(int index)
+    private Vector3 PosVer(int index)
     {
         return new Vector3(0.927f, ItemButtons[index].transform.localPosition.y, ItemButtons[index].transform.localPosition.z);
         //transform.localPosition = new Vector3(0.85799998f, -0.233400002f, -0.493999988f);
