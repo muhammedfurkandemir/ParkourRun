@@ -23,11 +23,13 @@ public class CustomizeManager : MonoBehaviour
     [Header("      Materials")]
     public Material[] Costumes;
     public Button[] CostumeButtons;
+    public Material DefaultCostume;
     public TMP_Text costumeText;
+    public SkinnedMeshRenderer _Renderer;
 
     int capIndex = -1;
     int stickIndex = -1;
-    int materialIndex = -1;//sapkanın olmaması durumu için default değer olarak -1 verdik.
+    int costumeIndex = -1;//sapkanın olmaması durumu için default değer olarak -1 verdik.
     //item button action field
     bool girildimi = false;
     int oldIndex;
@@ -41,7 +43,8 @@ public class CustomizeManager : MonoBehaviour
     {
         _MemoryManagment.DataSave_Int("activeCap", -1);
         _MemoryManagment.DataSave_Int("activeStick", -1);
-
+        _MemoryManagment.DataSave_Int("activeCostume", -1);
+        #region cap
         if (_MemoryManagment.DataLoad_Int("activeCap")==-1)
         {
             foreach (var item in Caps)
@@ -56,7 +59,8 @@ public class CustomizeManager : MonoBehaviour
             capIndex = _MemoryManagment.DataLoad_Int("activeCap");
             Caps[capIndex].SetActive(true);
         }
-
+        #endregion
+        #region stick
         if (_MemoryManagment.DataLoad_Int("activeStick") == -1)
         {
             foreach (var item in Sticks)
@@ -71,7 +75,21 @@ public class CustomizeManager : MonoBehaviour
             stickIndex = _MemoryManagment.DataLoad_Int("activeStick");
             Sticks[stickIndex].SetActive(true);
         }
-
+        #endregion
+        #region costume
+        if (_MemoryManagment.DataLoad_Int("activeCostume") == -1)
+        {            
+            costumeIndex = -1;
+            costumeText.text = "Varsayılan";
+        }
+        else
+        {
+            costumeIndex = _MemoryManagment.DataLoad_Int("activeCostume");
+            Material[] mats = _Renderer.materials;
+            mats[0] = Costumes[costumeIndex];
+            _Renderer.materials = mats;
+        }
+        #endregion
         _DataManagment.Save(_ItemInformation);
         _DataManagment.Load();
         _ItemInformation = _DataManagment.TransferData();
@@ -139,7 +157,6 @@ public class CustomizeManager : MonoBehaviour
             }
         }
     }
-
     public void WeaponAction_Button(string action)
     {
         if (action == "forward")
@@ -198,6 +215,77 @@ public class CustomizeManager : MonoBehaviour
             if (stickIndex != Sticks.Length - 1)//en önemli mantığı burda.burada bu if i koymazsak geri tuşunab astığımızda ileri tuşu geri aktif olmayacaktı.
             {
                 StickButtons[1].interactable = true;
+            }
+        }
+    }
+
+    public void CostumeAction_Button(string action)
+    {
+        if (action == "forward")
+        {
+            if (costumeIndex == -1)
+            {
+                costumeIndex = 0;
+                Material[] mats = _Renderer.materials;
+                mats[0] = Costumes[costumeIndex];
+                _Renderer.materials = mats;
+                costumeText.text = _ItemInformation[costumeIndex + 17].ItemName;
+            }
+            else
+            {
+                costumeIndex++;
+                Material[] mats = _Renderer.materials;
+                mats[0] = Costumes[costumeIndex];
+                _Renderer.materials = mats;
+                costumeText.text = _ItemInformation[costumeIndex + 17].ItemName;
+            }
+            if (costumeIndex == Costumes.Length - 1)
+            {
+                CostumeButtons[1].interactable = false;
+            }
+            else
+            {
+                CostumeButtons[1].interactable = true;
+            }
+            if (costumeIndex != -1)
+            {
+                CostumeButtons[0].interactable = true;
+            }
+        }
+        else
+        {
+            if (costumeIndex != -1)
+            {
+                costumeIndex--;
+                if (costumeIndex != -1)
+                {
+                    Material[] mats = _Renderer.materials;
+                    mats[0] = Costumes[costumeIndex];
+                    _Renderer.materials = mats;
+                    CostumeButtons[0].interactable = true;
+                    costumeText.text = _ItemInformation[costumeIndex + 17].ItemName;
+                }
+                else
+                {
+                    Material[] mats = _Renderer.materials;
+                    mats[0] = DefaultCostume;
+                    _Renderer.materials = mats;
+                    CostumeButtons[0].interactable = false;
+                    costumeText.text = "Varsayılan";
+                }
+
+            }
+            else
+            {
+                Material[] mats = _Renderer.materials;
+                mats[0] = DefaultCostume;
+                _Renderer.materials = mats;
+                CostumeButtons[0].interactable = false;
+                costumeText.text = "Varsayılan";
+            }
+            if (costumeIndex != Costumes.Length - 1)//en önemli mantığı burda.burada bu if i koymazsak geri tuşunab astığımızda ileri tuşu geri aktif olmayacaktı.
+            {
+                CostumeButtons[1].interactable = true;
             }
         }
     }

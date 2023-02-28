@@ -928,7 +928,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1932857640}
         m_TargetAssemblyTypeName: CustomizeManager, Assembly-CSharp
-        m_MethodName: CapAction_Button
+        m_MethodName: CostumeAction_Button
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4801,7 +4801,7 @@ GameObject:
   - component: {fileID: 1572996682}
   - component: {fileID: 1572996681}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CanvasActionButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5708,7 +5708,9 @@ MonoBehaviour:
   CostumeButtons:
   - {fileID: 2002769689}
   - {fileID: 300904023}
+  DefaultCostume: {fileID: 2100000, guid: c44e176332447a54c8321c90ee3033e9, type: 2}
   costumeText: {fileID: 148797988}
+  _Renderer: {fileID: 2366684214167910569}
   _ItemInformation:
   - GrupIndex: 1
     ItemIndex: 0
@@ -5794,11 +5796,6 @@ MonoBehaviour:
     ItemIndex: 6
     ItemName: Kalkan
     ItemCoin: 7000
-    PurchaseStatus: 0
-  - GrupIndex: 3
-    ItemIndex: 0
-    ItemName: Mevcut
-    ItemCoin: 0
     PurchaseStatus: 0
   - GrupIndex: 3
     ItemIndex: 1
@@ -6199,7 +6196,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1932857640}
         m_TargetAssemblyTypeName: CustomizeManager, Assembly-CSharp
-        m_MethodName: CapAction_Button
+        m_MethodName: CostumeAction_Button
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
