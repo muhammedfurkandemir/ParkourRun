@@ -8,10 +8,12 @@ using Furkan;
 public class CustomizeManager : MonoBehaviour
 {
     [Header("      TextField")]
-    public TMP_Text puanText;
+    public TMP_Text coinText;
+    public TMP_Text[] itemCoinsText;
     [Header("      ChooseButtons")]
     public GameObject[] ItemPanels;
     public GameObject[] ItemButtons;
+    public Button[] ItemUnlockButtons;
     [Header("      Caps")]
     public GameObject[] Caps;
     public Button[] CapButtons;
@@ -31,9 +33,11 @@ public class CustomizeManager : MonoBehaviour
     int stickIndex = -1;
     int costumeIndex = -1;//sapkanın olmaması durumu için default değer olarak -1 verdik.
     //item button action field
-    bool girildimi = false;
+    bool isClick = false;
     int oldIndex;
     Vector3 oldPos;
+
+    int activeButtonIndex=-1;
 
     Mmemory_Managment _MemoryManagment = new Mmemory_Managment();
     Data_Managment _DataManagment = new Data_Managment();
@@ -44,59 +48,110 @@ public class CustomizeManager : MonoBehaviour
         _MemoryManagment.DataSave_Int("activeCap", -1);
         _MemoryManagment.DataSave_Int("activeStick", -1);
         _MemoryManagment.DataSave_Int("activeCostume", -1);
-        #region cap
-        if (_MemoryManagment.DataLoad_Int("activeCap")==-1)
-        {
-            foreach (var item in Caps)
-            {
-                item.SetActive(false);
-            }
-            capIndex = -1;
-            capText.text = "Varsayılan";
-        }
-        else
-        {
-            capIndex = _MemoryManagment.DataLoad_Int("activeCap");
-            Caps[capIndex].SetActive(true);
-        }
-        #endregion
-        #region stick
-        if (_MemoryManagment.DataLoad_Int("activeStick") == -1)
-        {
-            foreach (var item in Sticks)
-            {
-                item.SetActive(false);
-            }
-            stickIndex = -1;
-            stickText.text = "Varsayılan";
-        }
-        else
-        {
-            stickIndex = _MemoryManagment.DataLoad_Int("activeStick");
-            Sticks[stickIndex].SetActive(true);
-        }
-        #endregion
-        #region costume
-        if (_MemoryManagment.DataLoad_Int("activeCostume") == -1)
-        {            
-            costumeIndex = -1;
-            costumeText.text = "Varsayılan";
-        }
-        else
-        {
-            costumeIndex = _MemoryManagment.DataLoad_Int("activeCostume");
-            Material[] mats = _Renderer.materials;
-            mats[0] = Costumes[costumeIndex];
-            _Renderer.materials = mats;
-        }
-        #endregion
+        _MemoryManagment.DataSave_Int("coin", 1500);
+        coinText.text = _MemoryManagment.DataLoad_Int("coin").ToString();
+        
+
         _DataManagment.Save(_ItemInformation);
         _DataManagment.Load();
         _ItemInformation = _DataManagment.TransferData();
         
     }
-    
-    
+
+    public void Select()
+    {
+        Debug.Log(activeButtonIndex);
+    }
+    public void Buy()
+    {
+        if (activeButtonIndex !=-1)
+        {
+            switch (activeButtonIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+            }
+        }
+    }
+    void ItemActiveCheckStatus(int index,bool isActive=false)
+    {
+        if (index==0)
+        {
+            if (_MemoryManagment.DataLoad_Int("activeCap") == -1)
+            {
+                foreach (var item in Caps)
+                {
+                    item.SetActive(false);
+                }
+                ItemUnlockButtons[0].interactable = false;
+                ItemUnlockButtons[1].interactable = false;
+                if (!isActive)
+                {
+                    capIndex = -1;
+                    capText.text = "Varsayılan";
+                }
+               
+            }
+            else
+            {
+                capIndex = _MemoryManagment.DataLoad_Int("activeCap");
+                Caps[capIndex].SetActive(true);
+            }
+        }
+        if (index == 1)
+        {
+            if (_MemoryManagment.DataLoad_Int("activeStick") == -1)
+            {
+                foreach (var item in Sticks)
+                {
+                    item.SetActive(false);
+                }
+                ItemUnlockButtons[0].interactable = false;
+                ItemUnlockButtons[1].interactable = false;
+                if (!isActive)
+                {
+                    stickIndex = -1;
+                    stickText.text = "Varsayılan";
+                }
+               
+            }
+            else
+            {
+                stickIndex = _MemoryManagment.DataLoad_Int("activeStick");
+                Sticks[stickIndex].SetActive(true);
+            }
+        }
+        if (index == 2)
+        {
+            if (_MemoryManagment.DataLoad_Int("activeCostume") == -1)
+            {                
+                if (!isActive)
+                {
+                    costumeIndex = -1;
+                    costumeText.text = "Varsayılan";
+                }
+                else
+                {
+                    Material[] mats = _Renderer.materials;
+                    mats[0] = DefaultCostume;
+                    _Renderer.materials = mats;
+                }
+                ItemUnlockButtons[0].interactable = false;
+                ItemUnlockButtons[1].interactable = false;
+            }
+            else
+            {
+                costumeIndex = _MemoryManagment.DataLoad_Int("activeCostume");
+                Material[] mats = _Renderer.materials;
+                mats[0] = Costumes[costumeIndex];
+                _Renderer.materials = mats;
+            }
+        }
+    }    
     public void CapAction_Button(string action)
     {
         if (action=="forward")
@@ -106,6 +161,18 @@ public class CustomizeManager : MonoBehaviour
                 capIndex = 0;
                 Caps[capIndex].SetActive(true);
                 capText.text = _ItemInformation[capIndex].ItemName;
+                if (!_ItemInformation[capIndex].PurchaseStatus)
+                {
+                     itemCoinsText[0].text= _ItemInformation[capIndex].ItemCoin.ToString();
+                     ItemUnlockButtons[0].interactable = false;
+                     ItemUnlockButtons[1].interactable = true;
+                }
+                else
+                {
+                    itemCoinsText[0].text = "Satın Alındı";
+                    ItemUnlockButtons[0].interactable = true;
+                    ItemUnlockButtons[1].interactable = false;
+                }
             }
             else
             {
@@ -113,6 +180,18 @@ public class CustomizeManager : MonoBehaviour
                 capIndex++;
                 Caps[capIndex].SetActive(true);
                 capText.text = _ItemInformation[capIndex].ItemName;
+                if (!_ItemInformation[capIndex].PurchaseStatus)
+                {
+                    itemCoinsText[0].text = _ItemInformation[capIndex].ItemCoin.ToString();
+                    ItemUnlockButtons[0].interactable = false;
+                    ItemUnlockButtons[1].interactable = true;
+                }
+                else
+                {
+                    itemCoinsText[0].text = "Satın Alındı";
+                    ItemUnlockButtons[0].interactable = true;
+                    ItemUnlockButtons[1].interactable = false;
+                }
             }
             if (capIndex==Caps.Length-1)
             {
@@ -138,11 +217,26 @@ public class CustomizeManager : MonoBehaviour
                     Caps[capIndex].SetActive(true);
                     CapButtons[0].interactable = true;
                     capText.text = _ItemInformation[capIndex].ItemName;
+                    if (!_ItemInformation[capIndex].PurchaseStatus)
+                    {
+                        itemCoinsText[0].text = _ItemInformation[capIndex].ItemCoin.ToString();
+                        ItemUnlockButtons[0].interactable = false;
+                        ItemUnlockButtons[1].interactable = true;
+                    }
+                    else
+                    {
+                        itemCoinsText[0].text = "Satın Alındı";
+                        ItemUnlockButtons[0].interactable = true;
+                        ItemUnlockButtons[1].interactable = false;
+                    }
                 }
                 else
                 {
                     CapButtons[0].interactable = false;
                     capText.text = "Varsayılan";
+                    itemCoinsText[0].text = "0";
+                    ItemUnlockButtons[0].interactable = true;
+                    ItemUnlockButtons[1].interactable = false;
                 }
                 
             }
@@ -150,6 +244,7 @@ public class CustomizeManager : MonoBehaviour
             {
                 CapButtons[0].interactable = false;
                 capText.text = "Varsayılan";
+                
             }
             if (capIndex != Caps.Length - 1)//en önemli mantığı burda.burada bu if i koymazsak geri tuşunab astığımızda ileri tuşu geri aktif olmayacaktı.
             {
@@ -166,6 +261,18 @@ public class CustomizeManager : MonoBehaviour
                 stickIndex = 0;
                 Sticks[stickIndex].SetActive(true);
                 stickText.text = _ItemInformation[stickIndex + 9].ItemName;
+                if (!_ItemInformation[stickIndex + 9].PurchaseStatus)
+                {
+                    itemCoinsText[1].text = _ItemInformation[stickIndex + 9].ItemCoin.ToString();
+                    ItemUnlockButtons[0].interactable = false;
+                    ItemUnlockButtons[1].interactable = true;
+                }
+                else
+                {
+                    itemCoinsText[1].text = "Satın Alındı";
+                    ItemUnlockButtons[0].interactable = true;
+                    ItemUnlockButtons[1].interactable = false;
+                }
             }
             else
             {
@@ -174,6 +281,18 @@ public class CustomizeManager : MonoBehaviour
                 stickIndex++;               
                 Sticks[stickIndex].SetActive(true);
                 stickText.text = _ItemInformation[stickIndex + 9].ItemName;
+                if (!_ItemInformation[stickIndex + 9].PurchaseStatus)
+                {
+                    itemCoinsText[1].text = _ItemInformation[stickIndex + 9].ItemCoin.ToString();
+                    ItemUnlockButtons[0].interactable = false;
+                    ItemUnlockButtons[1].interactable = true;
+                }
+                else
+                {
+                    itemCoinsText[1].text = "Satın Alındı";
+                    ItemUnlockButtons[0].interactable = true;
+                    ItemUnlockButtons[1].interactable = false;
+                }
             }
             if (stickIndex == Sticks.Length - 1)
             {
@@ -199,11 +318,26 @@ public class CustomizeManager : MonoBehaviour
                     Sticks[stickIndex].SetActive(true);
                     StickButtons[0].interactable = true;
                     stickText.text = _ItemInformation[stickIndex + 9].ItemName;
+                    if (!_ItemInformation[stickIndex + 9].PurchaseStatus)
+                    {
+                        itemCoinsText[1].text = _ItemInformation[stickIndex + 9].ItemCoin.ToString();
+                        ItemUnlockButtons[0].interactable = false;
+                        ItemUnlockButtons[1].interactable = true;
+                    }
+                    else
+                    {
+                        itemCoinsText[1].text = "Satın Alındı";
+                        ItemUnlockButtons[0].interactable = true;
+                        ItemUnlockButtons[1].interactable = false;
+                    }
                 }
                 else
                 {
                     StickButtons[0].interactable = false;
                     stickText.text = "Varsayılan";
+                    itemCoinsText[1].text = "0";
+                    ItemUnlockButtons[0].interactable = true;
+                    ItemUnlockButtons[1].interactable = false;
                 }
 
             }
@@ -230,6 +364,18 @@ public class CustomizeManager : MonoBehaviour
                 mats[0] = Costumes[costumeIndex];
                 _Renderer.materials = mats;
                 costumeText.text = _ItemInformation[costumeIndex + 17].ItemName;
+                if (!_ItemInformation[costumeIndex + 17].PurchaseStatus)
+                {
+                    itemCoinsText[2].text = _ItemInformation[costumeIndex + 17].ItemCoin.ToString();
+                    ItemUnlockButtons[0].interactable = false;
+                    ItemUnlockButtons[1].interactable = true;
+                }
+                else
+                {
+                    itemCoinsText[2].text = "Satın Alındı";
+                    ItemUnlockButtons[0].interactable = true;
+                    ItemUnlockButtons[1].interactable = false;
+                }
             }
             else
             {
@@ -238,6 +384,18 @@ public class CustomizeManager : MonoBehaviour
                 mats[0] = Costumes[costumeIndex];
                 _Renderer.materials = mats;
                 costumeText.text = _ItemInformation[costumeIndex + 17].ItemName;
+                if (!_ItemInformation[costumeIndex + 17].PurchaseStatus)
+                {
+                    itemCoinsText[2].text = _ItemInformation[costumeIndex + 17].ItemCoin.ToString();
+                    ItemUnlockButtons[0].interactable = false;
+                    ItemUnlockButtons[1].interactable = true;
+                }
+                else
+                {
+                    itemCoinsText[2].text = "Satın Alındı";
+                    ItemUnlockButtons[0].interactable = true;
+                    ItemUnlockButtons[1].interactable = false;
+                }
             }
             if (costumeIndex == Costumes.Length - 1)
             {
@@ -264,6 +422,19 @@ public class CustomizeManager : MonoBehaviour
                     _Renderer.materials = mats;
                     CostumeButtons[0].interactable = true;
                     costumeText.text = _ItemInformation[costumeIndex + 17].ItemName;
+                    if (!_ItemInformation[costumeIndex + 17].PurchaseStatus)
+                    {
+                        itemCoinsText[2].text = _ItemInformation[costumeIndex + 17].ItemCoin.ToString();
+                        ItemUnlockButtons[0].interactable = false;
+                        ItemUnlockButtons[1].interactable = true;
+                    }
+                    else
+                    {
+                        itemCoinsText[2].text = "Satın Alındı";
+                        ItemUnlockButtons[0].interactable = true;
+                        ItemUnlockButtons[1].interactable = false;
+
+                    }
                 }
                 else
                 {
@@ -272,6 +443,9 @@ public class CustomizeManager : MonoBehaviour
                     _Renderer.materials = mats;
                     CostumeButtons[0].interactable = false;
                     costumeText.text = "Varsayılan";
+                    itemCoinsText[2].text = "0";
+                    ItemUnlockButtons[0].interactable = true;
+                    ItemUnlockButtons[1].interactable = false;
                 }
 
             }
@@ -291,24 +465,27 @@ public class CustomizeManager : MonoBehaviour
     }
     public void ItemButtonAction(int index)
     {
-        if (girildimi)
+        ItemActiveCheckStatus(activeButtonIndex);//buraya tekrardan bak olmadı startta iflerden kurtarıp koyacaksın yani buton
+                                       //indexlerini başlangıçta direk alması lazım
+        if (isClick)
         {
             ItemButtons[oldIndex].transform.localPosition = oldPos;
             ItemButtons[oldIndex].transform.localScale = Vector3.one;
             ItemPanels[oldIndex].SetActive(false);
-            girildimi = false;
+            ItemActiveCheckStatus(oldIndex,true);
+            isClick = false;
         }
         oldPos = ItemButtons[index].transform.localPosition;        
         oldIndex = index;
         ItemPanels[index].SetActive(true);
-        ItemButtons[index].transform.localPosition = PosVer(index);
+        ItemButtons[index].transform.localPosition = PosCreate(index);
         ItemButtons[index].transform.localScale = ItemButtons[index].transform.localScale + new Vector3(.200f, .200f, .200f);
-        girildimi = true;
+        isClick = true;
+        activeButtonIndex = index;
     }
-    private Vector3 PosVer(int index)
+    private Vector3 PosCreate(int index)
     {
-        return new Vector3(0.927f, ItemButtons[index].transform.localPosition.y, ItemButtons[index].transform.localPosition.z);
-        //transform.localPosition = new Vector3(0.85799998f, -0.233400002f, -0.493999988f);
+        return new Vector3(0.927f, ItemButtons[index].transform.localPosition.y, ItemButtons[index].transform.localPosition.z);        
     }
     
    

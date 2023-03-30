@@ -133,13 +133,14 @@ GameObject:
   m_Component:
   - component: {fileID: 61425376}
   - component: {fileID: 61425375}
+  - component: {fileID: 61425377}
   m_Layer: 0
-  m_Name: Spot Light (1)
+  m_Name: DiffColorSpot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &61425375
 Light:
   m_ObjectHideFlags: 0
@@ -149,13 +150,13 @@ Light:
   m_GameObject: {fileID: 61425374}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 2
+  m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.9827337, g: 0, b: 1, a: 1}
-  m_Intensity: 5
-  m_Range: 5.76
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_Intensity: 30
+  m_Range: 7.77
+  m_SpotAngle: 36
+  m_InnerSpotAngle: 11
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -209,13 +210,30 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61425374}
-  m_LocalRotation: {x: 0.14429922, y: -0, z: -0, w: 0.98953414}
-  m_LocalPosition: {x: -0.07, y: 0.401, z: -2.22}
+  m_LocalRotation: {x: 0.68728316, y: -0.16625854, z: 0.16625854, w: 0.68728316}
+  m_LocalPosition: {x: -0.07, y: 6.11, z: -3.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 16.593, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: -147.309, z: -120.111}
+--- !u!114 &61425377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61425374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914f8c52903544b45b33791211bbc8a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Light: {fileID: 61425375}
+  _Color:
+  - {r: 0.93604904, g: 0.14595935, b: 0.9433962, a: 0}
+  - {r: 0.14449976, g: 0.6309635, b: 0.9339623, a: 0}
+  - {r: 0.36501727, g: 0.9150943, b: 0.13294764, a: 0}
 --- !u!23 &71943887
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -433,7 +451,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: sadasd
+  m_text: "Varsay\u0131lan"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -521,7 +539,7 @@ GameObject:
   - component: {fileID: 185434927}
   - component: {fileID: 185434926}
   m_Layer: 0
-  m_Name: Spot Light
+  m_Name: ShineSpot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1993,17 +2011,17 @@ RectTransform:
   m_GameObject: {fileID: 549523348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4954003, y: 1.4954003, z: 1.4954003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1092854968}
   - {fileID: 571948064}
-  m_Father: {fileID: 1052425571}
-  m_RootOrder: 1
+  m_Father: {fileID: 558791914}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 24.308136, y: 0}
-  m_SizeDelta: {x: -188.64291, y: -115.8954}
+  m_AnchoredPosition: {x: 16.256348, y: -0.00004196167}
+  m_SizeDelta: {x: -84.789734, y: -59.70543}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &549523350
 MonoBehaviour:
@@ -2072,14 +2090,15 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.4954003, y: 1.4954003, z: 1.4954003}
-  m_Children: []
+  m_Children:
+  - {fileID: 549523349}
   m_Father: {fileID: 1052425571}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.025756836, y: -0.8521093}
-  m_SizeDelta: {x: 157.1894, y: 72.1273}
+  m_AnchoredPosition: {x: -0.0016747, y: 0.000058174}
+  m_SizeDelta: {x: 209.62, y: 113.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &558791915
 MonoBehaviour:
@@ -2124,7 +2143,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 558791916}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1932857640}
+        m_TargetAssemblyTypeName: CustomizeManager, Assembly-CSharp
+        m_MethodName: Buy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &558791916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2197,8 +2228,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.988525, y: -6.1522017}
-  m_SizeDelta: {x: 175, y: 85}
+  m_AnchoredPosition: {x: -29.855, y: -6}
+  m_SizeDelta: {x: 151.2673, y: 73.472}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &571948065
 MonoBehaviour:
@@ -2267,14 +2298,15 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.4954003, y: 1.4954003, z: 1.4954003}
-  m_Children: []
+  m_Children:
+  - {fileID: 1729127280}
   m_Father: {fileID: 972530181}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.025756836, y: -0.8521093}
-  m_SizeDelta: {x: 157.1894, y: 72.1273}
+  m_AnchoredPosition: {x: -0.0026818, y: 0.000058174}
+  m_SizeDelta: {x: 209.62, y: 113.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &626959561
 MonoBehaviour:
@@ -2319,7 +2351,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 626959562}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1932857640}
+        m_TargetAssemblyTypeName: CustomizeManager, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &626959562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2532,7 +2576,7 @@ GameObject:
   - component: {fileID: 751038339}
   - component: {fileID: 751038338}
   m_Layer: 5
-  m_Name: ChoosePanel
+  m_Name: ChooseAndBuyPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2549,8 +2593,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1052425571}
   - {fileID: 972530181}
+  - {fileID: 1052425571}
   m_Father: {fileID: 230627818}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2631,8 +2675,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -67, y: 1.4042854}
-  m_SizeDelta: {x: 75, y: 75}
+  m_AnchoredPosition: {x: -72.9075, y: -1}
+  m_SizeDelta: {x: 63.185, y: 63.185}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &792303792
 MonoBehaviour:
@@ -3417,7 +3461,7 @@ GameObject:
   - component: {fileID: 972530183}
   - component: {fileID: 972530182}
   m_Layer: 5
-  m_Name: ButtonChoose
+  m_Name: ButtonSelect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3435,9 +3479,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 626959560}
-  - {fileID: 1729127280}
   m_Father: {fileID: 751038337}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3451,7 +3494,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972530180}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -3806,7 +3849,7 @@ GameObject:
   - component: {fileID: 1052425573}
   - component: {fileID: 1052425572}
   m_Layer: 5
-  m_Name: ButtonOpen
+  m_Name: ButtonBuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3824,9 +3867,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 558791914}
-  - {fileID: 549523349}
   m_Father: {fileID: 751038337}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3840,7 +3882,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052425570}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -4487,7 +4529,7 @@ Light:
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_Flare: {fileID: 0}
+  m_Flare: {fileID: 12100000, guid: f70a1c6b094eb1c43a5d69095f854c54, type: 2}
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
@@ -4512,7 +4554,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1315533845}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: -0.077, y: 3.473, z: -5.012}
+  m_LocalPosition: {x: 9.48, y: 8.499, z: -5.012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5293,17 +5335,17 @@ RectTransform:
   m_GameObject: {fileID: 1729127279}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4954003, y: 1.4954003, z: 1.4954003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 792303791}
   - {fileID: 1032237957}
-  m_Father: {fileID: 972530181}
-  m_RootOrder: 1
+  m_Father: {fileID: 626959560}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 24.308136, y: 0}
-  m_SizeDelta: {x: -188.64291, y: -115.8954}
+  m_AnchoredPosition: {x: 16.257065, y: -0.00004196167}
+  m_SizeDelta: {x: -84.789734, y: -59.70543}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1729127281
 MonoBehaviour:
@@ -5477,7 +5519,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: asdad
+  m_text: "Varsay\u0131lan"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5661,7 +5703,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6e6c8bd43f6664797186e6a19a99a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puanText: {fileID: 917630764}
+  coinText: {fileID: 917630764}
+  itemCoinsText:
+  - {fileID: 372170319}
+  - {fileID: 1281612868}
+  - {fileID: 1699355908}
   ItemPanels:
   - {fileID: 1607881636}
   - {fileID: 1580521558}
@@ -5670,6 +5716,9 @@ MonoBehaviour:
   - {fileID: 1094768528}
   - {fileID: 504874671}
   - {fileID: 856990575}
+  ItemUnlockButtons:
+  - {fileID: 626959561}
+  - {fileID: 558791915}
   Caps:
   - {fileID: 1707949553}
   - {fileID: 857561236}
@@ -5825,7 +5874,7 @@ MonoBehaviour:
   - GrupIndex: 3
     ItemIndex: 5
     ItemName: Santa
-    ItemCoin: 200
+    ItemCoin: 2000
     PurchaseStatus: 0
   - GrupIndex: 3
     ItemIndex: 6
@@ -5903,7 +5952,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "Varsay\u0131lan"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8574,7 +8623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3926458141055872750}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.53, y: -1.06, z: -4.67}
+  m_LocalPosition: {x: -0.53, y: -1.06, z: -3.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4417650674155352925}
