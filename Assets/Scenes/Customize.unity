@@ -5708,6 +5708,9 @@ MonoBehaviour:
   - {fileID: 372170319}
   - {fileID: 1281612868}
   - {fileID: 1699355908}
+  unlockButtonsText:
+  - {fileID: 1032237958}
+  - {fileID: 1092854969}
   ItemPanels:
   - {fileID: 1607881636}
   - {fileID: 1580521558}
@@ -5716,9 +5719,9 @@ MonoBehaviour:
   - {fileID: 1094768528}
   - {fileID: 504874671}
   - {fileID: 856990575}
-  ItemUnlockButtons:
-  - {fileID: 626959561}
-  - {fileID: 558791915}
+  itemBuyAndSelectButtons:
+  - {fileID: 972530180}
+  - {fileID: 1052425570}
   Caps:
   - {fileID: 1707949553}
   - {fileID: 857561236}
