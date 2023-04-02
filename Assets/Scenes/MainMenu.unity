@@ -1276,7 +1276,127 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 936be2b0de92a7048a8a525400d85836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ItemInformation: []
+  _ItemInformation:
+  - GrupIndex: 1
+    ItemIndex: 0
+    ItemName: Pijama
+    ItemCoin: 1000
+    PurchaseStatus: 0
+  - GrupIndex: 1
+    ItemIndex: 1
+    ItemName: Bere
+    ItemCoin: 2000
+    PurchaseStatus: 0
+  - GrupIndex: 1
+    ItemIndex: 2
+    ItemName: "Y\u0131lba\u015F\u0131"
+    ItemCoin: 3000
+    PurchaseStatus: 0
+  - GrupIndex: 1
+    ItemIndex: 3
+    ItemName: "Meksikal\u0131"
+    ItemCoin: 4000
+    PurchaseStatus: 0
+  - GrupIndex: 1
+    ItemIndex: 4
+    ItemName: Polis
+    ItemCoin: 5000
+    PurchaseStatus: 0
+  - GrupIndex: 1
+    ItemIndex: 5
+    ItemName: Viking
+    ItemCoin: 6000
+    PurchaseStatus: 0
+  - GrupIndex: 1
+    ItemIndex: 6
+    ItemName: "\u0130n\u015Faat\xE7\u0131"
+    ItemCoin: 7000
+    PurchaseStatus: 0
+  - GrupIndex: 1
+    ItemIndex: 7
+    ItemName: Kovboy
+    ItemCoin: 8000
+    PurchaseStatus: 0
+  - GrupIndex: 1
+    ItemIndex: 8
+    ItemName: Kral
+    ItemCoin: 9000
+    PurchaseStatus: 0
+  - GrupIndex: 2
+    ItemIndex: 0
+    ItemName: "Sava\u015F Baltas\u0131"
+    ItemCoin: 1000
+    PurchaseStatus: 0
+  - GrupIndex: 2
+    ItemIndex: 1
+    ItemName: "Geni\u015F K\u0131l\u0131\xE7"
+    ItemCoin: 2000
+    PurchaseStatus: 0
+  - GrupIndex: 2
+    ItemIndex: 2
+    ItemName: "Baltal\u0131 Karg\u0131"
+    ItemCoin: 3000
+    PurchaseStatus: 0
+  - GrupIndex: 2
+    ItemIndex: 3
+    ItemName: Topuz
+    ItemCoin: 4000
+    PurchaseStatus: 0
+  - GrupIndex: 2
+    ItemIndex: 4
+    ItemName: "\xC7ivili Karg\u0131"
+    ItemCoin: 5000
+    PurchaseStatus: 0
+  - GrupIndex: 2
+    ItemIndex: 5
+    ItemName: "\xC7ivili \xC7eki\xE7"
+    ItemCoin: 6000
+    PurchaseStatus: 0
+  - GrupIndex: 2
+    ItemIndex: 6
+    ItemName: "K\u0131l\u0131\xE7"
+    ItemCoin: 7000
+    PurchaseStatus: 0
+  - GrupIndex: 2
+    ItemIndex: 6
+    ItemName: Kalkan
+    ItemCoin: 7000
+    PurchaseStatus: 0
+  - GrupIndex: 3
+    ItemIndex: 1
+    ItemName: Turuncu
+    ItemCoin: 1000
+    PurchaseStatus: 0
+  - GrupIndex: 3
+    ItemIndex: 2
+    ItemName: Pembe
+    ItemCoin: 1000
+    PurchaseStatus: 0
+  - GrupIndex: 3
+    ItemIndex: 3
+    ItemName: Mor
+    ItemCoin: 1000
+    PurchaseStatus: 0
+  - GrupIndex: 3
+    ItemIndex: 4
+    ItemName: Siyah
+    ItemCoin: 1000
+    PurchaseStatus: 0
+  - GrupIndex: 3
+    ItemIndex: 5
+    ItemName: Gri
+    ItemCoin: 1000
+    PurchaseStatus: 0
+  - GrupIndex: 3
+    ItemIndex: 5
+    ItemName: Santa
+    ItemCoin: 2000
+    PurchaseStatus: 0
+  - GrupIndex: 3
+    ItemIndex: 6
+    ItemName: Ninja
+    ItemCoin: 3000
+    PurchaseStatus: 0
   ExitPanel: {fileID: 1996587250}
 --- !u!4 &1017844868
 Transform:
@@ -1290,7 +1410,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1069267629
 GameObject:
@@ -1622,7 +1742,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1149270525
 GameObject:
@@ -1873,7 +1993,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1353325682
 GameObject:
@@ -1956,7 +2076,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1375586770
 GameObject:
@@ -2530,7 +2650,7 @@ RectTransform:
   m_Children:
   - {fileID: 230627818}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

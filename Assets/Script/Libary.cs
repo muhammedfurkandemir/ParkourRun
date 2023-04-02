@@ -240,6 +240,9 @@ namespace Furkan
             {
                 PlayerPrefs.SetInt("LastLevel", 5);
                 PlayerPrefs.SetInt("Coin", 100);
+                PlayerPrefs.SetInt("activeCap", 100);
+                PlayerPrefs.SetInt("activeStick", 100);
+                PlayerPrefs.SetInt("activeCostume", 100);
             }
         }
     }

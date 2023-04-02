@@ -16,6 +16,13 @@ public class GameManager : MonoBehaviour
     public List<GameObject> SledgeHammerEfects;
     [Header("LevelData")]
     public List<GameObject> Enemies;
+    [Header("CharacterCustomize")]
+    public GameObject[] Caps;
+    public GameObject[] Sticks;
+    public Material[] Costumes;
+    public Material DefaultCostume;
+    public SkinnedMeshRenderer _Renderer;
+
     public int EnemyCount;
     bool isGameOver;
     bool isCometoEnd;
@@ -23,6 +30,10 @@ public class GameManager : MonoBehaviour
 
     Mathmatical_Funcition _Mathmatical_Funcition = new Mathmatical_Funcition();
     Mmemory_Managment _Memory_Managment = new Mmemory_Managment();
+    private void Awake()
+    {
+        CharacterCustomizeControl();
+    }
     private void Start()
     {
         CreateEnemy();
@@ -157,6 +168,26 @@ public class GameManager : MonoBehaviour
         }
         if(!isGameOver)
            BattleState(); 
+    }
+
+    void CharacterCustomizeControl()
+    {
+        if (_Memory_Managment.DataLoad_Int("activeCap") != -1)
+            Caps[_Memory_Managment.DataLoad_Int("activeCap")].SetActive(true);
+        if (_Memory_Managment.DataLoad_Int("activeStick") != -1)
+            Sticks[_Memory_Managment.DataLoad_Int("activeStick")].SetActive(true);
+        if (_Memory_Managment.DataLoad_Int("activeCostume") != -1)
+        {
+            Material[] mats = _Renderer.materials;
+            mats[0] = Costumes[_Memory_Managment.DataLoad_Int("activeCostume")];
+            _Renderer.materials = mats;
+        }
+        else
+        {
+            Material[] mats = _Renderer.materials;
+            mats[0] = DefaultCostume;
+            _Renderer.materials = mats;
+        }
     }
     
 }

@@ -14,7 +14,7 @@ public class MainMenuManager : MonoBehaviour
     private void Start()
     {
         _Memory_Managment.ControlAndDefine();
-       // _DataManagment.InıtialSetupFileCreation(_ItemInformation);tüm verilerden sonra açacağız.
+        _DataManagment.InıtialSetupFileCreation(_ItemInformation); // ilk oyun açıldığında veri dosyamızı oluşturacağız.
     }
     public void LoadScene(int index)
     {

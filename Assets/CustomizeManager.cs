@@ -47,9 +47,8 @@ public class CustomizeManager : MonoBehaviour
     public List<ItemInformation> _ItemInformation = new List<ItemInformation>();
     void Start()
     {
-        
-        _MemoryManagment.DataSave_Int("coin", 15000);
-        coinText.text = _MemoryManagment.DataLoad_Int("coin").ToString(); 
+        coinText.text = _MemoryManagment.DataLoad_Int("coin").ToString();
+
         _DataManagment.Load();
         _ItemInformation = _DataManagment.TransferData();
 
