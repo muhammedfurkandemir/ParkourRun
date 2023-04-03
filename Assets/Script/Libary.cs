@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Furkan
 {
@@ -231,13 +234,67 @@ namespace Furkan
         {
             return PlayerPrefs.GetFloat(Key);
         }
-
         public void ControlAndDefine()//oyun ilk açıldığında son kalınan leveli çağırmak içindir.
         {
             if (!PlayerPrefs.HasKey("LastLevel"))//haskey ile bu isimde level olup olmadığını kontrol ederiz.
             {
                 PlayerPrefs.SetInt("LastLevel", 5);
                 PlayerPrefs.SetInt("Coin", 100);
+                PlayerPrefs.SetInt("activeCap", 100);
+                PlayerPrefs.SetInt("activeStick", 100);
+                PlayerPrefs.SetInt("activeCostume", 100);
+            }
+        }
+    }
+    public class Data
+    {
+        public static List<ItemInformation> _ItemInformation = new List<ItemInformation>();
+    }
+
+    [Serializable]
+    public class ItemInformation
+    {
+        public int GrupIndex;
+        public int ItemIndex;
+        public string ItemName;
+        public int ItemCoin;
+        public bool PurchaseStatus;
+    }
+    public class Data_Managment
+    {
+        public void Save(List<ItemInformation> _ItemInformation)
+        {
+            
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.OpenWrite(Application.persistentDataPath/*=>uygulamanın çalışma klasörününün olduğu yeri verir*/ + "/ItemData");
+            bf.Serialize(file, _ItemInformation);
+            file.Close();
+        }
+       
+
+        List<ItemInformation> ItemLoadInformation;//kullan at liste oluşturdum.
+        public void Load()
+        {
+            if (File.Exists(Application.persistentDataPath + "/ItemData"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + "/ItemData", FileMode.Open);
+                ItemLoadInformation = (List<ItemInformation>)bf.Deserialize(file);
+                file.Close();
+            }
+        }
+        public List<ItemInformation> TransferData()
+        {
+            return ItemLoadInformation;
+        }
+        public void InıtialSetupFileCreation(List<ItemInformation> _ItemInformation)
+        {
+            if (!File.Exists(Application.persistentDataPath + "/ItemData"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Create(Application.persistentDataPath + "/ItemData");
+                bf.Serialize(file, _ItemInformation);
+                file.Close();
             }
         }
     }

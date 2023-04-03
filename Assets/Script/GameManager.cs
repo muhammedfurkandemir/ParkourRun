@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Furkan;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,16 +17,29 @@ public class GameManager : MonoBehaviour
     public List<GameObject> SledgeHammerEfects;
     [Header("LevelData")]
     public List<GameObject> Enemies;
+    [Header("CharacterCustomize")]
+    public GameObject[] Caps;
+    public GameObject[] Sticks;
+    public Material[] Costumes;
+    public Material DefaultCostume;
+    public SkinnedMeshRenderer _Renderer;
+
     public int EnemyCount;
     bool isGameOver;
     bool isCometoEnd;
 
+    Scene _Scene;
 
     Mathmatical_Funcition _Mathmatical_Funcition = new Mathmatical_Funcition();
     Mmemory_Managment _Memory_Managment = new Mmemory_Managment();
+    private void Awake()
+    {
+        CharacterCustomizeControl();
+    }
     private void Start()
     {
         CreateEnemy();
+        _Scene = SceneManager.GetActiveScene();
     }
     public void CreateEnemy()
     {
@@ -86,7 +100,11 @@ public class GameManager : MonoBehaviour
                 if (InstantCharacterCount <= EnemyCount)
                 {
                     print("kaybettin");
-
+                    if (_Scene.buildIndex==_Memory_Managment.DataLoad_Int("LastLevel"))
+                    {
+                        _Memory_Managment.DataSave_Int("coin", _Memory_Managment.DataLoad_Int("coin") + 500);
+                        _Memory_Managment.DataSave_Int("LastLvel", _Memory_Managment.DataLoad_Int("LastLevel") + 1);
+                    }
                     MainCharacter.GetComponent<Animator>().SetBool("lose", true);
                     MainCharacter.GetComponent<Animator>().SetBool("win", false);
                     MainCharacter.transform.Rotate(0, -180, 0);
@@ -94,7 +112,11 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     print("kazandın");
-
+                    if (_Scene.buildIndex == _Memory_Managment.DataLoad_Int("LastLevel"))
+                    {
+                        _Memory_Managment.DataSave_Int("coin", _Memory_Managment.DataLoad_Int("coin") + 500);
+                        _Memory_Managment.DataSave_Int("LastLvel", _Memory_Managment.DataLoad_Int("LastLevel") + 1);
+                    }
                     MainCharacter.GetComponent<Animator>().SetBool("win", true);
                     MainCharacter.GetComponent<Animator>().SetBool("lose", false);
                     MainCharacter.transform.Rotate(0, -180, 0);
@@ -157,6 +179,26 @@ public class GameManager : MonoBehaviour
         }
         if(!isGameOver)
            BattleState(); 
+    }
+
+    void CharacterCustomizeControl()
+    {
+        if (_Memory_Managment.DataLoad_Int("activeCap") != -1)
+            Caps[_Memory_Managment.DataLoad_Int("activeCap")].SetActive(true);
+        if (_Memory_Managment.DataLoad_Int("activeStick") != -1)
+            Sticks[_Memory_Managment.DataLoad_Int("activeStick")].SetActive(true);
+        if (_Memory_Managment.DataLoad_Int("activeCostume") != -1)
+        {
+            Material[] mats = _Renderer.materials;
+            mats[0] = Costumes[_Memory_Managment.DataLoad_Int("activeCostume")];
+            _Renderer.materials = mats;
+        }
+        else
+        {
+            Material[] mats = _Renderer.materials;
+            mats[0] = DefaultCostume;
+            _Renderer.materials = mats;
+        }
     }
     
 }
