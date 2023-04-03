@@ -16,6 +16,7 @@ public class CustomizeManager : MonoBehaviour
     public GameObject[] ItemPanels;
     public GameObject[] ItemButtons;
     public GameObject[] itemBuyAndSelectButtons;
+    public Image selectButtonImage;
     [Header("      Caps")]
     public GameObject[] Caps;
     public Button[] CapButtons;
@@ -68,7 +69,8 @@ public class CustomizeManager : MonoBehaviour
              
                 case 0:
                     _MemoryManagment.DataSave_Int("activeCap", capIndex);
-
+                    itemBuyAndSelectButtons[0].GetComponentInChildren<Image>().sprite = selectButtonImage.sprite; 
+                    print("bastıldı");
                     break;
                 case 1:
                     _MemoryManagment.DataSave_Int("activeStick", stickIndex);
@@ -79,6 +81,8 @@ public class CustomizeManager : MonoBehaviour
             }
         }
     }
+
+  
     public void Buy()
     {
         if (activeButtonIndex !=-1)
@@ -86,28 +90,15 @@ public class CustomizeManager : MonoBehaviour
             switch (activeButtonIndex)
             {
                 case 0:
-                    _ItemInformation[capIndex].PurchaseStatus = true;
-                    _MemoryManagment.DataSave_Int("coin", _MemoryManagment.DataLoad_Int("coin") - _ItemInformation[capIndex].ItemCoin);
-                    unlockButtonsText[1].text = "Satın Al";
-                    itemBuyAndSelectButtons[1].SetActive(false);
-                    itemBuyAndSelectButtons[0].SetActive(true);
-                    coinText.text = _MemoryManagment.DataLoad_Int("coin").ToString();
+                    BuyItemResult(capIndex);                    
                     break;
                 case 1:
-                    _ItemInformation[stickIndex + 9].PurchaseStatus = true;
-                    _MemoryManagment.DataSave_Int("coin", _MemoryManagment.DataLoad_Int("coin") - _ItemInformation[stickIndex + 9].ItemCoin);
-                    unlockButtonsText[1].text = "Satın Al";
-                    itemBuyAndSelectButtons[1].SetActive(false);
-                    itemBuyAndSelectButtons[0].SetActive(true);
-                    coinText.text = _MemoryManagment.DataLoad_Int("coin").ToString();
+                    int index = stickIndex + 9;
+                    BuyItemResult(index);                  
                     break;
                 case 2:
-                    _ItemInformation[costumeIndex + 17].PurchaseStatus = true;
-                    _MemoryManagment.DataSave_Int("coin", _MemoryManagment.DataLoad_Int("coin") - _ItemInformation[costumeIndex + 17].ItemCoin);
-                    unlockButtonsText[1].text = "Satın Al";
-                    itemBuyAndSelectButtons[1].SetActive(false);
-                    itemBuyAndSelectButtons[0].SetActive(true);
-                    coinText.text = _MemoryManagment.DataLoad_Int("coin").ToString();
+                    int index2 = costumeIndex + 17;
+                    BuyItemResult(index2);
                     break;
             }
         }
@@ -569,20 +560,28 @@ public class CustomizeManager : MonoBehaviour
         ItemButtons[index].transform.localScale = ItemButtons[index].transform.localScale + new Vector3(.200f, .200f, .200f);
         isClick = true;
         activeButtonIndex = index;
-    }
-    private Vector3 PosCreate(int index)
-    {
-        return new Vector3(0.927f, ItemButtons[index].transform.localPosition.y, ItemButtons[index].transform.localPosition.z);        
-    }
+    }   
     
     public void  MainMenuBackButton()
     {
         _DataManagment.Save(_ItemInformation);
         SceneManager.LoadScene(0);
     }
-   
 
+    //--------------------------------
+    void BuyItemResult(int index)
+    {
+        _ItemInformation[index].PurchaseStatus = true;
+        _MemoryManagment.DataSave_Int("coin", _MemoryManagment.DataLoad_Int("coin") - _ItemInformation[index].ItemCoin);
+        unlockButtonsText[1].text = "Satın Al";
+        itemBuyAndSelectButtons[1].SetActive(false);
+        itemBuyAndSelectButtons[0].SetActive(true);
+        coinText.text = _MemoryManagment.DataLoad_Int("coin").ToString();
+    }
 
-
+    private Vector3 PosCreate(int index)
+    {
+        return new Vector3(0.927f, ItemButtons[index].transform.localPosition.y, ItemButtons[index].transform.localPosition.z);
+    }
 }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Furkan;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     bool isGameOver;
     bool isCometoEnd;
 
+    Scene _Scene;
 
     Mathmatical_Funcition _Mathmatical_Funcition = new Mathmatical_Funcition();
     Mmemory_Managment _Memory_Managment = new Mmemory_Managment();
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         CreateEnemy();
+        _Scene = SceneManager.GetActiveScene();
     }
     public void CreateEnemy()
     {
@@ -97,7 +100,11 @@ public class GameManager : MonoBehaviour
                 if (InstantCharacterCount <= EnemyCount)
                 {
                     print("kaybettin");
-
+                    if (_Scene.buildIndex==_Memory_Managment.DataLoad_Int("LastLevel"))
+                    {
+                        _Memory_Managment.DataSave_Int("coin", _Memory_Managment.DataLoad_Int("coin") + 500);
+                        _Memory_Managment.DataSave_Int("LastLvel", _Memory_Managment.DataLoad_Int("LastLevel") + 1);
+                    }
                     MainCharacter.GetComponent<Animator>().SetBool("lose", true);
                     MainCharacter.GetComponent<Animator>().SetBool("win", false);
                     MainCharacter.transform.Rotate(0, -180, 0);
@@ -105,7 +112,11 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     print("kazandın");
-
+                    if (_Scene.buildIndex == _Memory_Managment.DataLoad_Int("LastLevel"))
+                    {
+                        _Memory_Managment.DataSave_Int("coin", _Memory_Managment.DataLoad_Int("coin") + 500);
+                        _Memory_Managment.DataSave_Int("LastLvel", _Memory_Managment.DataLoad_Int("LastLevel") + 1);
+                    }
                     MainCharacter.GetComponent<Animator>().SetBool("win", true);
                     MainCharacter.GetComponent<Animator>().SetBool("lose", false);
                     MainCharacter.transform.Rotate(0, -180, 0);
