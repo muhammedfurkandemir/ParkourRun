@@ -11,6 +11,7 @@ public class MainMenuManager : MonoBehaviour
 
     public List<ItemInformation> _ItemInformation = new List<ItemInformation>();
     public GameObject ExitPanel;
+    public AudioSource ButtonSound;
     private void Start()
     {
         _Memory_Managment.ControlAndDefine();
@@ -18,16 +19,19 @@ public class MainMenuManager : MonoBehaviour
     }
     public void LoadScene(int index)
     {
+        ButtonSound.Play();
         SceneManager.LoadScene(index);
     }
     public void PlayButton()
     {
+        ButtonSound.Play();
         SceneManager.LoadScene(PlayerPrefs.GetInt("LastLevel"));
     }
     
     public void ExitButtonPopup(string state)
     {
-        if(state=="exit")
+        ButtonSound.Play();
+        if (state=="exit")
             ExitPanel.SetActive(true);
         else if (state=="ok")
             Application.Quit();

@@ -18,6 +18,7 @@ TagManager:
   - FinalTrigger
   - Column
   - EmptyCharacter
+  - MenuSound
   layers:
   - Default
   - TransparentFX

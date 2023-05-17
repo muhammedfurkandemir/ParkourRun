@@ -11,6 +11,7 @@ public class Level_Manager : MonoBehaviour
     Mmemory_Managment _MemoryManagment = new Mmemory_Managment();
     public int level;
     public Sprite sprite;
+    public AudioSource ButtonSound;
     void Start()
     {
        
@@ -37,12 +38,14 @@ public class Level_Manager : MonoBehaviour
     }
     public void SceneLoad(int sceneIndex)
     {
+        ButtonSound.Play();
         SceneManager.LoadScene(sceneIndex);
     }
 
 
     public void TurnBack()
     {
+        ButtonSound.Play();
         SceneManager.LoadScene(0);//ana menu ındex=0
     }
 }

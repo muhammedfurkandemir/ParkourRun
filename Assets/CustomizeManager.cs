@@ -32,6 +32,8 @@ public class CustomizeManager : MonoBehaviour
     public TMP_Text costumeText;
     public SkinnedMeshRenderer _Renderer;
 
+    public AudioSource[] Sounds;
+
     int capIndex = -1;
     int stickIndex = -1;
     int costumeIndex = -1;//sapkanın olmaması durumu için default değer olarak -1 verdik.
@@ -62,6 +64,7 @@ public class CustomizeManager : MonoBehaviour
 
     public void Select()
     {
+        Sounds[1].Play();
         if (activeButtonIndex != -1)
         {    
             switch (activeButtonIndex)
@@ -85,6 +88,7 @@ public class CustomizeManager : MonoBehaviour
   
     public void Buy()
     {
+        Sounds[2].Play();
         if (activeButtonIndex !=-1)
         {
             switch (activeButtonIndex)
@@ -204,6 +208,7 @@ public class CustomizeManager : MonoBehaviour
     }    
     public void CapAction_Button(string action)
     {
+        Sounds[0].Play();
         if (action=="forward")
         {
             
@@ -316,6 +321,7 @@ public class CustomizeManager : MonoBehaviour
     }
     public void WeaponAction_Button(string action)
     {
+        Sounds[0].Play();
         if (action == "forward")
         {
             if (stickIndex == -1)
@@ -425,6 +431,7 @@ public class CustomizeManager : MonoBehaviour
     }
     public void CostumeAction_Button(string action)
     {
+        Sounds[0].Play();
         if (action == "forward")
         {          
             if (costumeIndex == -1)
@@ -543,6 +550,7 @@ public class CustomizeManager : MonoBehaviour
     }
     public void ItemButtonAction(int index)
     {
+        Sounds[0].Play();
         ItemActiveCheckStatus(index);
         if (isClick)
         {
@@ -564,6 +572,7 @@ public class CustomizeManager : MonoBehaviour
     
     public void  MainMenuBackButton()
     {
+        Sounds[0].Play();
         _DataManagment.Save(_ItemInformation);
         SceneManager.LoadScene(0);
     }

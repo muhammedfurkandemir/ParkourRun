@@ -246,10 +246,6 @@ namespace Furkan
             }
         }
     }
-    public class Data
-    {
-        public static List<ItemInformation> _ItemInformation = new List<ItemInformation>();
-    }
 
     [Serializable]
     public class ItemInformation

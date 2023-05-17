@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     Mmemory_Managment _Memory_Managment = new Mmemory_Managment();
     private void Awake()
     {
+        Destroy(GameObject.FindWithTag("MenuSound"));
         CharacterCustomizeControl();
     }
     private void Start()
