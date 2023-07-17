@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public int EnemyCount;
     bool isGameOver;
     bool isCometoEnd;
+    
 
     Scene _Scene;
 
@@ -74,6 +75,8 @@ public class GameManager : MonoBehaviour
         //            break;
         //        }
         //    }
+        Debug.Log(_Memory_Managment.DataLoad_Int("activeCap"));
+        
     }
 
     void BattleState()
@@ -184,22 +187,29 @@ public class GameManager : MonoBehaviour
 
     void CharacterCustomizeControl()
     {
-        if (_Memory_Managment.DataLoad_Int("activeCap") != -1)
-            Caps[_Memory_Managment.DataLoad_Int("activeCap")].SetActive(true);
-        if (_Memory_Managment.DataLoad_Int("activeStick") != -1)
-            Sticks[_Memory_Managment.DataLoad_Int("activeStick")].SetActive(true);
-        if (_Memory_Managment.DataLoad_Int("activeCostume") != -1)
+        
+       
+        if (CustomizeManager.customizeLoaded)
         {
-            Material[] mats = _Renderer.materials;
-            mats[0] = Costumes[_Memory_Managment.DataLoad_Int("activeCostume")];
-            _Renderer.materials = mats;
+            Debug.Log("kostüm değiştirildi");
+            if (_Memory_Managment.DataLoad_Int("activeCap") != -1)
+                Caps[_Memory_Managment.DataLoad_Int("activeCap")].SetActive(true);
+            if (_Memory_Managment.DataLoad_Int("activeStick") != -1)
+                Sticks[_Memory_Managment.DataLoad_Int("activeStick")].SetActive(true);
+            if (_Memory_Managment.DataLoad_Int("activeCostume") != -1)
+            {
+                Material[] mats = _Renderer.materials;
+                mats[0] = Costumes[_Memory_Managment.DataLoad_Int("activeCostume")];
+                _Renderer.materials = mats;
+            }
+            else
+            {
+                Material[] mats = _Renderer.materials;
+                mats[0] = DefaultCostume;
+                _Renderer.materials = mats;
+            }
         }
-        else
-        {
-            Material[] mats = _Renderer.materials;
-            mats[0] = DefaultCostume;
-            _Renderer.materials = mats;
-        }
+        
     }
     
 }
